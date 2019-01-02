@@ -1,4 +1,4 @@
-package com.royole.androidsampledemo;
+package com.royole.androidsampledemo.activity;
 
 import android.annotation.TargetApi;
 import android.app.FragmentManager;
@@ -14,7 +14,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.royole.androidsampledemo.R;
 import com.royole.settingspreference.activity.SettingsActivity;
+import com.royole.settingspreference.activity.SettingsMainActivity;
 import com.royole.settingspreference.fragment.CommentSettingsFragment;
 import com.royole.settingspreference.fragment.GeneralSettingsFragment;
 
@@ -31,9 +33,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = null;
         switch (view.getId()){
             case R.id.tosettings:
-                intent = new Intent(this,SettingsActivity.class);
+                intent = new Intent(this,SettingsMainActivity.class);
                 startActivity(intent);
             break;
+            case R.id.pendingactivity:
+                intent = new Intent(this,PendingIntentActivity.class);
+                startActivity(intent);
+                break;
+                default:
+                    break;
         }
    }
 }
