@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
@@ -18,8 +19,9 @@ import android.widget.Toast;
 import com.royole.settingspreference.R;
 import com.royole.settingspreference.fragment.CommentSettingsFragment;
 import com.royole.settingspreference.fragment.GeneralSettingsFragment;
+import com.royole.settingspreference.fragment.XmlPreferenceFragment;
 
-public class SettingsActivity extends FragmentActivity {
+public class SettingsActivity extends FragmentActivity implements XmlPreferenceFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class SettingsActivity extends FragmentActivity {
             fragmentTransaction.replace(R.id.preferences_fragment, new GeneralSettingsFragment());
         } else if ("CommentSettingsFragment".equals(fragId)) {
             fragmentTransaction.replace(R.id.preferences_fragment, new CommentSettingsFragment());
+        }else if ("XmlPreferenceFragment".equals(fragId)) {
+            fragmentTransaction.replace(R.id.preferences_fragment, new XmlPreferenceFragment());
         }
         fragmentTransaction.commit();
     }
@@ -79,5 +83,10 @@ public class SettingsActivity extends FragmentActivity {
         Intent mAccessibleIntent =
                 new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
         startActivity(mAccessibleIntent);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

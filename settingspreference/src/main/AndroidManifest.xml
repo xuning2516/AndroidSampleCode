@@ -3,7 +3,8 @@
     package="com.royole.settingspreference">
 
     <application>
-        <activity android:name=".activity.SettingsActivity"></activity>
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.SettingsMainActivity"></activity>
     </application>
 
 </manifest>
