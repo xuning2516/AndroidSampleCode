@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.royole.settingspreference.activity.SettingsActivity;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class PreferenceAdapter extends RecyclerView.Adapter<PreferenceAdapter.ViewHolder> {
     private String[] mDataset;
     private Context mContext;
 
@@ -23,19 +23,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public ViewHolder(TextView v) {
             super(v);
             mTextView = v;
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView textView = (TextView)v;
+                    switch (textView.getText().toString()){
+                        case "RecyclerView":
+                            break;
+                    }
+                }
+            });
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(Context context, String[] myDataset) {
+    public PreferenceAdapter(Context context, String[] myDataset) {
         mDataset = myDataset;
         mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public PreferenceAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                           int viewType) {
         // create a new view
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.my_text_view, parent, false);

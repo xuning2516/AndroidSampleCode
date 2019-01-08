@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <PreferenceCategory android:title="In-line preference">
     <CheckBoxPreference android:title="Checkbox preference"
         android:summary="This is a checkbox"></CheckBoxPreference>
 </PreferenceCategory>
     <PreferenceCategory android:title="Dialog-based preferences">
         <EditTextPreference android:title="Edit text preference"
-            android:summary="An example that users an edit text dialog">
+            android:summary="An example that users an edit text dialog"
+            >
         </EditTextPreference>
         <ListPreference android:title="List Preference"
             android:key="xml_preference_list"

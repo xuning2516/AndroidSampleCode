@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.royole.settingspreference.R;
+import com.royole.settingspreference.fragment.CodePreferenceFragment;
 import com.royole.settingspreference.fragment.CommentSettingsFragment;
 import com.royole.settingspreference.fragment.GeneralSettingsFragment;
 import com.royole.settingspreference.fragment.XmlPreferenceFragment;
@@ -70,6 +71,8 @@ public class SettingsActivity extends FragmentActivity implements XmlPreferenceF
             fragmentTransaction.replace(R.id.preferences_fragment, new CommentSettingsFragment());
         }else if ("XmlPreferenceFragment".equals(fragId)) {
             fragmentTransaction.replace(R.id.preferences_fragment, new XmlPreferenceFragment());
+        }else if ("CodePreferenceFragment".equals(fragId)) {
+            fragmentTransaction.replace(R.id.preferences_fragment, new CodePreferenceFragment());
         }
         fragmentTransaction.commit();
     }
@@ -89,4 +92,5 @@ public class SettingsActivity extends FragmentActivity implements XmlPreferenceF
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 }

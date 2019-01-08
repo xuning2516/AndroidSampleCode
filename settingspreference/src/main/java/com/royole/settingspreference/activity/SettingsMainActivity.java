@@ -5,9 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.royole.settingspreference.MyAdapter;
+import com.royole.settingspreference.PreferenceAdapter;
 import com.royole.settingspreference.R;
-import com.royole.settingspreference.fragment.GeneralSettingsFragment;
 
 public class SettingsMainActivity extends AppCompatActivity {
 
@@ -18,7 +17,7 @@ public class SettingsMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_main);
-        mRecyclerView = findViewById(R.id.ryview);
+        mRecyclerView = (RecyclerView) findViewById(R.id.ryview);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -31,11 +30,12 @@ public class SettingsMainActivity extends AppCompatActivity {
         String[] myDataset = {
                 "GeneralSettingsFragment",
                 "CommentSettingFragment",
-                "XmlPreferenceFragment"
+                "XmlPreferenceFragment",
+                "CodePreferenceFragment"
         };
 
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(this,myDataset);
+        mAdapter = new PreferenceAdapter(this,myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
     }

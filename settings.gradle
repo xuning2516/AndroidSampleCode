@@ -1,1 +1,1 @@
-include ':app', ':settingspreference'
+include ':app', ':settingspreference', ':views'
