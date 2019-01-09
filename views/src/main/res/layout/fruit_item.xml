@@ -3,30 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/mainimageView"
+        android:id="@+id/fruit_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_assistant_black_36dp" />
 
     <TextView
-        android:id="@+id/mainitemname"
+        android:id="@+id/fruit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/mainimageView"
-        app:layout_constraintStart_toEndOf="@+id/mainimageView"
-        app:layout_constraintTop_toTopOf="@+id/mainimageView" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/fruit_image"
+        app:layout_constraintStart_toEndOf="@+id/fruit_image"
+        app:layout_constraintTop_toTopOf="@+id/fruit_image" />
 </android.support.constraint.ConstraintLayout>
-
-

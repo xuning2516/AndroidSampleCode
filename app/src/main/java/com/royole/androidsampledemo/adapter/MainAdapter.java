@@ -9,10 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.royole.androidsampledemo.R;
+import com.royole.androidsampledemo.model.MainItem;
 import com.royole.views.activity.ViewMainActivity;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
-    private int[] mDataset;
+    private MainItem[] mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -21,7 +22,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
         // each data item is just a string in this case
         public TextView mTextView;
         public ImageView mImageView;
-        public MyViewHolder(ImageView v) {
+        public MyViewHolder(View v) {
             super(v);
             //mTextView = v;
             v.setOnClickListener(new View.OnClickListener() {
@@ -30,7 +31,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
                     clickImageView(v,getAdapterPosition());
                 }
             });
-            mImageView = v;
+            mImageView = v.findViewById(R.id.mainimageView);
+            mTextView = v.findViewById(R.id.mainitemname);
         }
 
         private void clickImageView(View v,int position){
@@ -45,7 +47,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MainAdapter(int[] myDataset) {
+    public MainAdapter(MainItem[] myDataset) {
         mDataset = myDataset;
     }
 
@@ -54,10 +56,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
     public MainAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
         // create a new view
-        ImageView imageView = (ImageView) LayoutInflater.from(parent.getContext())
+        View mainItemView  =  LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.main_recycle_item, parent, false);
         //...
-        MyViewHolder vh = new MyViewHolder(imageView);
+        MyViewHolder vh = new MyViewHolder(mainItemView);
         return vh;
     }
 
@@ -67,7 +69,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.mTextView.setText(mDataset[position]);
-        holder.mImageView.setImageResource(mDataset[position]);
+        holder.mImageView.setImageResource(mDataset[position].imageResId);
+        holder.mTextView.setText(mDataset[position].imageName);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

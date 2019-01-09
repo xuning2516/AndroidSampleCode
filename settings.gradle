@@ -1,1 +1,1 @@
-include ':app', ':settingspreference', ':views'
+include ':app', ':settingspreference', ':views', ':androidcommon'

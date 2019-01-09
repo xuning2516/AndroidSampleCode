@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.royole.androidsampledemo.R;
 import com.royole.androidsampledemo.adapter.MainAdapter;
+import com.royole.androidsampledemo.model.MainItem;
 import com.royole.settingspreference.activity.SettingsActivity;
 import com.royole.settingspreference.activity.SettingsMainActivity;
 import com.royole.settingspreference.fragment.CommentSettingsFragment;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    protected int[] mDataset;
+    protected MainItem[] mDataset;
     private static final int DATASET_COUNT = 3;
 
     @Override
@@ -73,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
 //        for (int i = 0; i < DATASET_COUNT; i++) {
 //            mDataset[i] = "This is element #" + i;
 //        }
-        mDataset = new int[DATASET_COUNT];
-        mDataset[0] = R.drawable.ic_business_black_24dp;
-        mDataset[1] = R.drawable.ic_call_black_24dp;
-        mDataset[2] = R.drawable.ic_chat_black_24dp;
+        mDataset = new MainItem[DATASET_COUNT];
+        mDataset[0] = new MainItem(R.drawable.ic_business_black_24dp,"views");
+        mDataset[1] = new MainItem(R.drawable.ic_call_black_24dp,"app");
+        mDataset[2] =new MainItem(R.drawable.ic_chat_black_24dp,"app");
     }
 }
