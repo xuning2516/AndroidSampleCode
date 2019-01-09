@@ -13,10 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author nixu
- * @date
+ *
  */
-
 public class PermissionUtils {
 
 
@@ -37,7 +35,7 @@ public class PermissionUtils {
      *
      * @return 未授权的权限
      */
-    public static List<String> checkMorePermissions(Context context, String[] permissions) {
+    public static List<String> checkPermissions(Context context, String[] permissions) {
         List<String> permissionList = new ArrayList<>();
         for (int i = 0; i < permissions.length; i++) {
             if (!checkPermission(context, permissions[i]))
@@ -50,15 +48,15 @@ public class PermissionUtils {
     /**
      * 请求多个权限
      */
-    public static void requestMorePermissions(Context context, List permissionList, int requestCode) {
+    public static void requestPermissions(Context context, List permissionList, int requestCode) {
         String[] permissions = (String[]) permissionList.toArray(new String[permissionList.size()]);
-        requestMorePermissions(context, permissions, requestCode);
+        requestPermissions(context, permissions, requestCode);
     }
 
     /**
      * 请求多个权限
      */
-    public static void requestMorePermissions(Context context, String[] permissions, int requestCode) {
+    public static void requestPermissions(Context context, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions((Activity) context, permissions, requestCode);
     }
 
@@ -80,25 +78,27 @@ public class PermissionUtils {
     /**
      * 请求权限
      */
-    public static void requestPermission(Context context, String permission, int requestCode) {
+    public static void requestPermissions(Context context, String permission, int requestCode) {
         ActivityCompat.requestPermissions((Activity) context, new String[]{permission}, requestCode);
     }
 
     /**
+     * @deprecated
      * 检测权限并请求权限：如果没有权限，则请求权限
      */
-    public static void checkAndRequestPermission(Context context, String permission, int requestCode) {
+    public static void checkAndRequestPermissions(Context context, String permission, int requestCode) {
         if (!checkPermission(context, permission)) {
-            requestPermission(context, permission, requestCode);
+            requestPermissions(context, permission, requestCode);
         }
     }
 
     /**
+     * @deprecated
      * 检测并请求多个权限
      */
-    public static void checkAndRequestMorePermissions(Context context, String[] permissions, int requestCode) {
-        List<String> permissionList = checkMorePermissions(context, permissions);
-        requestMorePermissions(context, permissionList, requestCode);
+    public static void checkAndRequestPermissions(Context context, String[] permissions, int requestCode) {
+        List<String> permissionList = checkPermissions(context, permissions);
+        requestPermissions(context, permissionList, requestCode);
     }
 
 
@@ -107,14 +107,14 @@ public class PermissionUtils {
      *
      * @describe：具体实现由回调接口决定
      */
-    public static void checkPermission(Context context, String permission, PermissionCheckCallBack callBack) {
+    public static void checkPermissions(Context context, String permission, PermissionCheckCallBack callBack) {
         if (checkPermission(context, permission)) { // 用户已授予权限
-            callBack.onHasPermission();
+            callBack.onGranted();
         } else {
             if (judgePermission(context, permission))  // 用户之前已拒绝过权限申请
-                callBack.onUserHasAlreadyTurnedDown(permission);
+                callBack.onDenied(permission);
             else                                       // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
-                callBack.onUserHasAlreadyTurnedDownAndDontAsk(permission);
+                callBack.onDeniedDontAsk(permission);
         }
     }
 
@@ -123,25 +123,51 @@ public class PermissionUtils {
      *
      * @describe：具体实现由回调接口决定
      */
-    public static void checkMorePermissions(Context context, String[] permissions, PermissionCheckCallBack callBack) {
-        List<String> permissionList = checkMorePermissions(context, permissions);
-        if (permissionList.size() == 0) {  // 用户已授予权限
-            callBack.onHasPermission();
-        } else {
-            boolean isFirst = true;
-            for (int i = 0; i < permissionList.size(); i++) {
-                String permission = permissionList.get(i);
-                if (judgePermission(context, permission)) {
-                    isFirst = false;
-                    break;
+    public static void checkPermissions(Context context, String[] permissions, PermissionCheckCallBack callBack) {
+//        List<String> permissionList = checkPermissions(context, permissions);
+//        if (permissionList.size() == 0) {  // 用户已授予权限
+//            callBack.onGranted();
+//        } else {
+//            boolean isFirst = true;
+//            for (int i = 0; i < permissionList.size(); i++) {
+//                String permission = permissionList.get(i);
+//                if (judgePermission(context, permission)) {
+//                    isFirst = false;
+//                    break;
+//                }
+//            }
+//            String[] unauthorizedMorePermissions = (String[]) permissionList.toArray(new String[permissionList.size()]);
+//            if (isFirst)// 用户之前已拒绝过权限申请
+//                callBack.onDenied(unauthorizedMorePermissions);
+//            else       // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+//                callBack.onDeniedDontAsk(unauthorizedMorePermissions);
+//
+//        }
+
+        int grantedCount = 0;
+        List<String> deniedpermission = new ArrayList<>();
+        List<String> deniedNoAskpermission = new ArrayList<>();
+        for (String permission:permissions) {
+            if (checkPermission(context, permission)) { // 用户已授予权限
+                //callBack.onGranted();
+                grantedCount ++;
+            } else {
+                if (judgePermission(context, permission)) { // 用户之前已拒绝过权限申请
+                    //callBack.onDenied(permission);
+                    deniedpermission.add(permission);
+                }
+                else {                                  // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+                    //callBack.onDeniedDontAsk(permission);
+                    deniedNoAskpermission.add(permission);
                 }
             }
-            String[] unauthorizedMorePermissions = (String[]) permissionList.toArray(new String[permissionList.size()]);
-            if (isFirst)// 用户之前已拒绝过权限申请
-                callBack.onUserHasAlreadyTurnedDownAndDontAsk(unauthorizedMorePermissions);
-            else       // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
-                callBack.onUserHasAlreadyTurnedDown(unauthorizedMorePermissions);
-
+        }
+        if(grantedCount == permissions.length){
+            callBack.onGranted();
+        }else if(deniedpermission.size() > 0){
+            callBack.onDenied((String[])deniedpermission.toArray());
+        }else if(deniedNoAskpermission.size() > 0){
+            callBack.onDeniedDontAsk((String[])deniedNoAskpermission.toArray());
         }
     }
 
@@ -151,21 +177,21 @@ public class PermissionUtils {
      */
     public static void checkAndRequestPermission(Context context, String permission, int requestCode, PermissionRequestSuccessCallBack callBack) {
         if (checkPermission(context, permission)) {// 用户已授予权限
-            callBack.onHasPermission();
+            callBack.onGranted();
         } else {
-            requestPermission(context, permission, requestCode);
+            requestPermissions(context, permission, requestCode);
         }
     }
 
     /**
      * 检测并申请多个权限
      */
-    public static void checkAndRequestMorePermissions(Context context, String[] permissions, int requestCode, PermissionRequestSuccessCallBack callBack) {
-        List<String> permissionList = checkMorePermissions(context, permissions);
+    public static void checkAndRequestPermissions(Context context, String[] permissions, int requestCode, PermissionRequestSuccessCallBack callBack) {
+        List<String> permissionList = checkPermissions(context, permissions);
         if (permissionList.size() == 0) {  // 用户已授予权限
-            callBack.onHasPermission();
+            callBack.onGranted();
         } else {
-            requestMorePermissions(context, permissionList, requestCode);
+            requestPermissions(context, permissionList, requestCode);
         }
     }
 
@@ -183,14 +209,14 @@ public class PermissionUtils {
     /**
      * 用户申请权限返回
      */
-    public static void onRequestPermissionResult(Context context, String permission, int[] grantResults, PermissionCheckCallBack callback) {
+    public static void onRequestPermissionsResult(Context context, String permission, int[] grantResults, PermissionCheckCallBack callback) {
         if (PermissionUtils.isPermissionRequestSuccess(grantResults)) {
-            callback.onHasPermission();
+            callback.onGranted();
         } else {
             if (PermissionUtils.judgePermission(context, permission)) {
-                callback.onUserHasAlreadyTurnedDown(permission);
+                callback.onDenied(permission);
             } else {
-                callback.onUserHasAlreadyTurnedDownAndDontAsk(permission);
+                callback.onDeniedDontAsk(permission);
             }
         }
     }
@@ -198,25 +224,61 @@ public class PermissionUtils {
     /**
      * 用户申请多个权限返回
      */
-    public static void onRequestMorePermissionsResult(Context context, String[] permissions, PermissionCheckCallBack callback) {
-        boolean isBannedPermission = false;
-        List<String> permissionList = checkMorePermissions(context, permissions);
-        if (permissionList.size() == 0)
-            callback.onHasPermission();
-        else {
-            for (int i = 0; i < permissionList.size(); i++) {
-                if (!judgePermission(context, permissionList.get(i))) {
-                    isBannedPermission = true;
-                    break;
+    public static void onRequestPermissionsResult(Context context, String[] permissions, int[] grantResults,PermissionCheckCallBack callback) {
+//        boolean isBannedPermission = false;
+//        List<String> permissionList = checkPermissions(context, permissions);
+//        if (permissionList.size() == 0)
+//            callback.onGranted();
+//        else {
+//            for (int i = 0; i < permissionList.size(); i++) {
+//                if (!judgePermission(context, permissionList.get(i))) {
+//                    isBannedPermission = true;
+//                    break;
+//                }
+//            }
+//            //　已禁止再次询问权限
+//            if (isBannedPermission)
+//                callback.onUserHasAlreadyTurnedDownAndDontAsk(permissions);
+//            else // 拒绝权限
+//                callback.onUserHasAlreadyTurnedDown(permissions);
+//        }
+
+        int grantedCount = 0;
+        List<String> deniedpermission = new ArrayList<>();
+        List<String> deniedNoAskpermission = new ArrayList<>();
+
+
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0) {
+
+            for (int i=0; i<permissions.length; ++i) {
+                String permission = permissions[i];
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) { // 用户已授予权限
+                    //callBack.onGranted();
+                    grantedCount ++;
+                } else {
+                    if (judgePermission(context, permission)) { // 用户之前已拒绝过权限申请
+                        //callBack.onDenied(permission);
+                        deniedpermission.add(permission);
+                    }
+                    else {                                  // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+                        //callBack.onDeniedDontAsk(permission);
+                        deniedNoAskpermission.add(permission);
+                    }
                 }
             }
-            //　已禁止再次询问权限
-            if (isBannedPermission)
-                callback.onUserHasAlreadyTurnedDownAndDontAsk(permissions);
-            else // 拒绝权限
-                callback.onUserHasAlreadyTurnedDown(permissions);
-        }
+            if(grantedCount == permissions.length){
+                callback.onGranted();
+            }else if(deniedpermission.size() > 0){
+                callback.onDenied((String[])deniedpermission.toArray());
+            }else if(deniedNoAskpermission.size() > 0){
+                callback.onDeniedDontAsk((String[])deniedNoAskpermission.toArray());
+            }
 
+        } else {
+            // If request is cancelled, the result arrays are empty.
+           
+        }
     }
 
 
@@ -241,7 +303,7 @@ public class PermissionUtils {
         /**
          * 用户已授予权限
          */
-        void onHasPermission();
+        void onGranted();
     }
 
 
@@ -250,21 +312,21 @@ public class PermissionUtils {
         /**
          * 用户已授予权限
          */
-        void onHasPermission();
+        void onGranted();
 
         /**
          * 用户已拒绝过权限
          *
          * @param permission:被拒绝的权限
          */
-        void onUserHasAlreadyTurnedDown(String... permission);
+        void onDenied(String... permission);
 
         /**
          * 用户已拒绝过并且已勾选不再询问选项、用户第一次申请权限;
          *
          * @param permission:被拒绝的权限
          */
-        void onUserHasAlreadyTurnedDownAndDontAsk(String... permission);
+        void onDeniedDontAsk(String... permission);
     }
 
     /**
