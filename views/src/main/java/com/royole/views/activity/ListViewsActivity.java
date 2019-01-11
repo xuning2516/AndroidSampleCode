@@ -1,15 +1,11 @@
 package com.royole.views.activity;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.royole.views.R;
 import com.royole.views.activity.listview.ActivateItemActivity;
@@ -31,33 +27,15 @@ import com.royole.views.activity.listview.SlowAdapterActivity;
 import com.royole.views.activity.listview.TranscriptListActivity;
 import com.royole.views.adapter.ListViewArrayAdapter;
 
-public class ViewsActivity extends AppCompatActivity {
+public class ListViewsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_views);
-        Intent intent = getIntent();
-        String viewName = intent.getStringExtra("viewName").toLowerCase();
-        int id = getResources().getIdentifier("layout_"+viewName, "layout", getPackageName());
-        setContentView(id);
-
-
-        Intent activityIntent = new Intent();
-        switch (viewName){
-            case "listview":
-                initListView();
-
-                break;
-
-            case "buttons":
-                initButtons();
-                break;
-        }
-
+        setContentView(R.layout.activity_list_views);
     }
 
-    //TODO::move to Fragment
+
     public void initListView(){
         String[] myStringArray={
                 "array",
@@ -113,24 +91,4 @@ public class ViewsActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void initButtons(){
-
-    }
-
-    public void onButtionClick(View view){
-        int i = view.getId();
-        if (i == R.id.floatingActionButton) {
-            Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                    .setAction("Action", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(ViewsActivity.this, "snackaction", Toast.LENGTH_SHORT).show();
-                        }
-                    }).show();
-        }else if(i == R.id.floatingActionButton){
-
-        }
-    }
-
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *@url https://github.com/ifadai/PermissionUtils
  */
 public class PermissionUtils {
 
@@ -277,7 +277,7 @@ public class PermissionUtils {
 
         } else {
             // If request is cancelled, the result arrays are empty.
-           
+
         }
     }
 

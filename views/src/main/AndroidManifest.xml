@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.royole.views">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application>
         <activity
@@ -14,7 +14,22 @@
             android:label="viewsactivity" />
         <activity android:name=".activity.listview.ArrayAdapterListActivity" />
         <activity android:name=".activity.listview.CusorPeopleActivity" />
-        <activity android:name=".activity.listview.CusorPhoneActivity"></activity>
+        <activity android:name=".activity.listview.CusorPhoneActivity" />
+        <activity android:name=".activity.listview.ListAdpaterActivity" />
+        <activity android:name=".activity.listview.SeparatorsActivity" />
+        <activity android:name=".activity.listview.CollapsedListActivity" />
+        <activity android:name=".activity.listview.SingleChoiceListActivity" />
+        <activity android:name=".activity.listview.MultiChoiceListActivity" />
+        <activity android:name=".activity.listview.ItemSelectListActivity" />
+        <activity android:name=".activity.listview.TranscriptListActivity" />
+        <activity android:name=".activity.listview.SlowAdapterActivity" />
+        <activity android:name=".activity.listview.EfficientAdapterActivity" />
+        <activity android:name=".activity.listview.SelectionModeActivity" />
+        <activity android:name=".activity.listview.BorderSelectActivity" />
+        <activity android:name=".activity.listview.ActivateItemActivity" />
+        <activity android:name=".activity.listview.PhotosActivity" />
+        <activity android:name=".activity.listview.ArrayOverlayActivity" />
+        <activity android:name=".activity.ListViewsActivity"></activity>
     </application>
 
 </manifest>

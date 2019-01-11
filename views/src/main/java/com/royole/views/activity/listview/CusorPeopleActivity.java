@@ -70,29 +70,28 @@ public class CusorPeopleActivity extends AppCompatActivity {
 
     private void initCheckPermissions(){
         if(Build.VERSION.SDK_INT >= 23) { //android M only
-            PermissionUtils.checkMorePermissions(mContext,
+            PermissionUtils.checkPermissions(mContext,
                     new String[]{Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS},
                     new PermissionUtils.PermissionCheckCallBack() {
                         @Override
-                        public void onHasPermission() {
+                        public void onGranted() {
                             //onHasPermissiontoCamera();
                             initDataAndView();
                         }
 
                         @Override
-                        public void onUserHasAlreadyTurnedDown(final String... permission) {
-
+                        public void onDenied(final String... permission) {
                             showExplainDialog(permission, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    PermissionUtils.requestMorePermissions(CusorPeopleActivity.this, permission, REQUEST_CODE_PERMISSIONS);
+                                    PermissionUtils.requestPermissions(CusorPeopleActivity.this, permission, REQUEST_CODE_PERMISSIONS);
                                 }
                             });
                         }
 
                         @Override
-                        public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
-                            PermissionUtils.requestMorePermissions(CusorPeopleActivity.this, permission, REQUEST_CODE_PERMISSIONS);
+                        public void onDeniedDontAsk(String... permission) {
+                            PermissionUtils.requestPermissions(CusorPeopleActivity.this, permission, REQUEST_CODE_PERMISSIONS);
                         }
                     });
         }
@@ -101,20 +100,20 @@ public class CusorPeopleActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        PermissionUtils.onRequestMorePermissionsResult(mContext, PERMISSIONS, new PermissionUtils.PermissionCheckCallBack() {
+        PermissionUtils.onRequestPermissionsResult(mContext, PERMISSIONS, grantResults, new PermissionUtils.PermissionCheckCallBack() {
             @Override
-            public void onHasPermission() {
+            public void onGranted() {
                // toCamera();
                 initDataAndView();
             }
 
             @Override
-            public void onUserHasAlreadyTurnedDown(String... permission) {
+            public void onDenied(String... permission) {
                 Toast.makeText(mContext, "我们需要"+Arrays.toString(permission)+"权限", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onUserHasAlreadyTurnedDownAndDontAsk(String... permission) {
+            public void onDeniedDontAsk(String... permission) {
                 Toast.makeText(mContext, "我们需要"+Arrays.toString(permission)+"权限", Toast.LENGTH_SHORT).show();
                 PermissionUtils.toAppSetting(mContext);
             }

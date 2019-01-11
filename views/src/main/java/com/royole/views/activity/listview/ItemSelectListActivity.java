@@ -12,7 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CursorAdapter;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -23,10 +24,12 @@ import com.royole.views.R;
 
 import java.util.Arrays;
 
-public class CusorPhoneActivity extends AppCompatActivity {
-    private static final String TAG = "zhanghao";
-    
+public class ItemSelectListActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,AdapterView.OnItemClickListener{
+    private static final String TAG = "ItemSelectListActivity";
+
+    private TextView mPhone;
     private ListView mListView;
+
     private Context mContext;
     private static final  int REQUEST_CODE_PERMISSIONS = 0x002;
     private final String[] PERMISSIONS = new String[]{Manifest.permission.READ_CONTACTS
@@ -36,21 +39,27 @@ public class CusorPhoneActivity extends AppCompatActivity {
             ContactsContract.CommonDataKinds.Phone._ID,
             ContactsContract.CommonDataKinds.Phone.TYPE,
             ContactsContract.CommonDataKinds.Phone.LABEL,
-            ContactsContract.CommonDataKinds.Phone.NUMBER
+            ContactsContract.CommonDataKinds.Phone.NUMBER,
+            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
     };
 
-    private static final int COLUMN_TYPE = 1;;
-    private static final int COLUMN_LABEL = 2;
+    private static final int COLUMN_PHONE_TYPE = 1;
+    private static final int COLUMN_PHONE_LABEL = 2;
+    private static final int COLUMN_PHONE_NUMBER = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cusor_phone);
-        mListView = findViewById(R.id.list);
+        setContentView(R.layout.activity_item_select_list);
         mContext = this;
+        mListView = findViewById(R.id.list);
+        mPhone = (TextView) findViewById(R.id.phone);
+        mListView.setOnItemSelectedListener(this);
+//        mListView.setOnItemClickListener(this);
+        mListView.setItemsCanFocus(false);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         initCheckPermissions();
     }
-
 
     private void initCheckPermissions(){
         if(Build.VERSION.SDK_INT >= 23) { //android M only
@@ -117,43 +126,50 @@ public class CusorPhoneActivity extends AppCompatActivity {
     }
 
     private void initDataAndView(){
-        // Get a cursor with all phones
+        // Get a cursor with all numbers.
+        // This query will only return contacts with phone numbers
         Cursor c = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                PHONE_PROJECTION, null, null, null);
+                PHONE_PROJECTION, ContactsContract.CommonDataKinds.Phone.NUMBER + " NOT NULL", null, null);
         startManagingCursor(c);
 
-        // Map Cursor columns to views defined in simple_list_item_2.xml
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2, c,
-                new String[] {
-                        ContactsContract.CommonDataKinds.Phone.TYPE,
-                        ContactsContract.CommonDataKinds.Phone.NUMBER
-                },
-                new int[] { android.R.id.text1, android.R.id.text2 },
-                CursorAdapter.FLAG_AUTO_REQUERY);
-        //Used to display a readable string for the phone type
-        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-
-                Log.d(TAG, "setViewValue: "+ cursor.getString(columnIndex));
-               // Log.d(TAG, "setViewValue: ");
-                //Let the adapter handle the binding if the column is not TYPE
-                if (columnIndex != COLUMN_TYPE) {
-                    return false;
-                }
-                int type = cursor.getInt(COLUMN_TYPE);
-                String label = null;
-                //Custom type? Then get the custom label
-                if (type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
-                    label = cursor.getString(COLUMN_LABEL);
-                }
-                //Get the readable string
-                String text = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(getResources(), type, label);
-                //Set text
-                ((TextView) view).setText(text);
-                return true;
-            }
-        });
+        ListAdapter adapter = new SimpleCursorAdapter(this,
+                // Use a template that displays a text view
+                android.R.layout.simple_list_item_1,
+                // Give the cursor to the list adapter
+                c,
+                // Map the DISPLAY_NAME column to...
+                new String[] {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME},
+                // The "text1" view defined in the XML template
+                new int[] {android.R.id.text1});
         mListView.setAdapter(adapter);
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        Log.d(TAG, "onItemSelected: ");
+        if (position >= 0) {
+            //Get current cursor
+            Cursor c = (Cursor) parent.getItemAtPosition(position);
+            int type = c.getInt(COLUMN_PHONE_TYPE);
+            String phone = c.getString(COLUMN_PHONE_NUMBER);
+            String label = null;
+            //Custom type? Then get the custom label
+            if (type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
+                label = c.getString(COLUMN_PHONE_LABEL);
+            }
+            //Get the readable string
+            String numberType = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(getResources(), type, label);
+            String text = numberType + ": " + phone;
+            Log.d(TAG, "onItemSelected: "+ text);
+            mPhone.setText(text);
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        Log.d(TAG, "onNothingSelected: ");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d(TAG, "onItemClick: ");
     }
 }

@@ -47,11 +47,10 @@ public class ViewMainActivity extends AppCompatActivity {
 //            mDataset[i] = "This is element #" + i;
 //        }
 
-       mDataset[0] =
-                "RecyclerView";
-               mDataset[1] =        "ListView";
-        mDataset[2] =  "XmlPreferenceFragment";
-                mDataset[3] =     "CodePreferenceFragment";
+       mDataset[0] = "RecyclerView";
+       mDataset[1] =        "ListView";
+       mDataset[2] =  "Buttons";
+       mDataset[3] =     "CodePreferenceFragment";
 
     }
 }
