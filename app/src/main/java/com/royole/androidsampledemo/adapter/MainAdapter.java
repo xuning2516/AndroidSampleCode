@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.royole.androidsampledemo.R;
 import com.royole.androidsampledemo.model.MainItem;
+import com.royole.storageaccess.StorageMainActivity;
 import com.royole.views.activity.ViewMainActivity;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
@@ -40,6 +41,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
             switch (position){
                 case 0:// view
                     intent = new Intent(v.getContext(),ViewMainActivity.class);
+                    v.getContext().startActivity(intent);
+                case 2: //storage
+                    intent = new Intent(v.getContext(), StorageMainActivity.class);
                     v.getContext().startActivity(intent);
                     break;
             }

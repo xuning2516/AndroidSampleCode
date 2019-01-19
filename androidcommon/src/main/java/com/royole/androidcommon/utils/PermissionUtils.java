@@ -23,7 +23,7 @@ public class PermissionUtils {
      *
      * @return true：已授权； false：未授权；
      */
-    public static boolean checkPermission(Context context, String permission) {
+    public static boolean checkPermissions(Context context, String permission) {
         if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
             return true;
         else
@@ -38,7 +38,7 @@ public class PermissionUtils {
     public static List<String> checkPermissions(Context context, String[] permissions) {
         List<String> permissionList = new ArrayList<>();
         for (int i = 0; i < permissions.length; i++) {
-            if (!checkPermission(context, permissions[i]))
+            if (!checkPermissions(context, permissions[i]))
                 permissionList.add(permissions[i]);
         }
         return permissionList;
@@ -87,7 +87,7 @@ public class PermissionUtils {
      * 检测权限并请求权限：如果没有权限，则请求权限
      */
     public static void checkAndRequestPermissions(Context context, String permission, int requestCode) {
-        if (!checkPermission(context, permission)) {
+        if (!checkPermissions(context, permission)) {
             requestPermissions(context, permission, requestCode);
         }
     }
@@ -108,13 +108,13 @@ public class PermissionUtils {
      * @describe：具体实现由回调接口决定
      */
     public static void checkPermissions(Context context, String permission, PermissionCheckCallBack callBack) {
-        if (checkPermission(context, permission)) { // 用户已授予权限
+        if (checkPermissions(context, permission)) { // 用户已授予权限
             callBack.onGranted();
         } else {
             if (judgePermission(context, permission))  // 用户之前已拒绝过权限申请
-                callBack.onDenied(permission);
-            else                                       // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
                 callBack.onDeniedDontAsk(permission);
+            else                                       // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
+                callBack.onDenied(permission);
         }
     }
 
@@ -148,17 +148,17 @@ public class PermissionUtils {
         List<String> deniedpermission = new ArrayList<>();
         List<String> deniedNoAskpermission = new ArrayList<>();
         for (String permission:permissions) {
-            if (checkPermission(context, permission)) { // 用户已授予权限
+            if (checkPermissions(context, permission)) { // 用户已授予权限
                 //callBack.onGranted();
                 grantedCount ++;
             } else {
                 if (judgePermission(context, permission)) { // 用户之前已拒绝过权限申请
                     //callBack.onDenied(permission);
-                    deniedpermission.add(permission);
+                    deniedNoAskpermission.add(permission);
                 }
                 else {                                  // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
                     //callBack.onDeniedDontAsk(permission);
-                    deniedNoAskpermission.add(permission);
+                    deniedpermission.add(permission);
                 }
             }
         }
@@ -176,7 +176,7 @@ public class PermissionUtils {
      * 检测并申请权限
      */
     public static void checkAndRequestPermission(Context context, String permission, int requestCode, PermissionRequestSuccessCallBack callBack) {
-        if (checkPermission(context, permission)) {// 用户已授予权限
+        if (checkPermissions(context, permission)) {// 用户已授予权限
             callBack.onGranted();
         } else {
             requestPermissions(context, permission, requestCode);
@@ -214,9 +214,9 @@ public class PermissionUtils {
             callback.onGranted();
         } else {
             if (PermissionUtils.judgePermission(context, permission)) {
-                callback.onDenied(permission);
-            } else {
                 callback.onDeniedDontAsk(permission);
+            } else {
+                callback.onDenied(permission);
             }
         }
     }
@@ -259,11 +259,11 @@ public class PermissionUtils {
                 } else {
                     if (judgePermission(context, permission)) { // 用户之前已拒绝过权限申请
                         //callBack.onDenied(permission);
-                        deniedpermission.add(permission);
+                        deniedNoAskpermission.add(permission);
                     }
                     else {                                  // 用户之前已拒绝并勾选了不在询问、用户第一次申请权限。
                         //callBack.onDeniedDontAsk(permission);
-                        deniedNoAskpermission.add(permission);
+                        deniedpermission.add(permission);
                     }
                 }
             }
