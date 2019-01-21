@@ -41,8 +41,10 @@ public class SharePreferencesActivity extends AppCompatActivity {
         SharedPreferences namePreferences = mContext.getSharedPreferences("my_prefs",MODE_PRIVATE);
         SharedPreferences.Editor editor = namePreferences.edit();
 
-        editor.putInt("score_key", score);
-        editor.commit();
+        editor.putString("name", "royole");
+        editor.putInt("age",6);
+        editor.putBoolean("married",false);
+        editor.apply();
 
     }
 
@@ -52,6 +54,11 @@ public class SharePreferencesActivity extends AppCompatActivity {
             SharedPreferences sharedPref = ((Activity)mContext).getPreferences(Context.MODE_PRIVATE);
             int score = sharedPref.getInt("score_key",-1);
             mInfo.append("read score_key "+ score+"\n");
+
+            SharedPreferences my_prefs = mContext.getSharedPreferences("my_prefs",MODE_PRIVATE);
+            mInfo.append("read name "+ my_prefs.getString("name","")+"\n");
+            mInfo.append("read age "+ my_prefs.getInt("age",-1)+"\n");
+            mInfo.append("read married "+ my_prefs.getBoolean("married",false)+"\n");
         }else if(R.id.save == id){
             SharedPreferences sharedPref = ((Activity)mContext).getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
