@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.royole.datashare">
+
+    <application>
+        <activity android:name=".IntenShareReceiverActivity"
+            android:label="intentsharereceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ContentProviderShareActivity"
+            android:label="ContentProviderShareActivity" />
+        <activity
+            android:name=".FileShareActivity"
+            android:label="FileShareActivity" />
+        <activity
+            android:name=".IntentShareActivity"
+            android:label="IntentShareActivity" />
+        <activity
+            android:name=".DataShareMainActivity"
+            android:label="DataShareMainActivity" />
+    </application>
+
+</manifest>
