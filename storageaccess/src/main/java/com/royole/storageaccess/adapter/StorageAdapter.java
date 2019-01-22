@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.royole.storageaccess.R;
+import com.royole.storageaccess.activity.DataBaseActivity;
 import com.royole.storageaccess.activity.ExternalFileActivity;
 import com.royole.storageaccess.activity.InnerFileActivity;
 import com.royole.storageaccess.activity.SharePreferencesActivity;
@@ -46,6 +47,11 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.MyViewHo
                             break;
                         case "externalfile":
                             intent = new Intent(v.getContext(), ExternalFileActivity.class);
+                            intent.putExtra("viewName",mTextView.getText().toString());
+                            v.getContext().startActivity(intent);
+                            break;
+                        case "database":
+                            intent = new Intent(v.getContext(), DataBaseActivity.class);
                             intent.putExtra("viewName",mTextView.getText().toString());
                             v.getContext().startActivity(intent);
                             break;

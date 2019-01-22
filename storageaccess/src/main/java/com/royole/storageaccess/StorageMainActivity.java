@@ -49,7 +49,7 @@ public class StorageMainActivity extends AppCompatActivity {
         mDataset[0] = "sharepreferences";
         mDataset[1] =  "innerfile";
         mDataset[2] =  "externalfile";
-        mDataset[3] =     "CodePreferenceFragment";
+        mDataset[3] =  "database";
 
     }
 }

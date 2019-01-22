@@ -3,10 +3,14 @@
     package="com.royole.storageaccess">
 
     <application>
-        <activity android:name=".activity.ExternalFileActivity"
-            android:label="externalfile"></activity>
-        <activity android:name=".activity.InnerFileActivity"
-            android:label="innerfile"/>
+        <activity android:name=".activity.DataBaseActivity"
+            android:label="database"></activity>
+        <activity
+            android:name=".activity.ExternalFileActivity"
+            android:label="externalfile" />
+        <activity
+            android:name=".activity.InnerFileActivity"
+            android:label="innerfile" />
         <activity
             android:name=".activity.SharePreferencesActivity"
             android:label="SharePreferencesActivity"
