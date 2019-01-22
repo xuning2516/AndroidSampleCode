@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.InnerFileActivity">
+
+    <Button
+        android:id="@+id/read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAllCaps="false"
+        android:text="read"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAllCaps="false"
+        android:text="write"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/read"
+        app:layout_constraintTop_toTopOf="@+id/read" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/dirs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="onClick"
+        android:text="dirs"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/write"
+        app:layout_constraintTop_toTopOf="@+id/write" />
+
+    <Button
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="del"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/dirs"
+        app:layout_constraintTop_toTopOf="@+id/dirs" />
+
+    <Button
+        android:id="@+id/query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="query"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="@+id/del"
+        app:layout_constraintStart_toEndOf="@+id/del" />
+
+    <Button
+        android:id="@+id/createcachetmp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="createcachetmp"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toTopOf="@+id/read"
+        app:layout_constraintStart_toStartOf="@+id/read" />
+
+    <Button
+        android:id="@+id/contextfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="contextfile"
+        android:onClick="onClick"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/createcachetmp"
+        app:layout_constraintTop_toTopOf="@+id/createcachetmp" />
+</android.support.constraint.ConstraintLayout>

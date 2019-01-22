@@ -47,8 +47,8 @@ public class StorageMainActivity extends AppCompatActivity {
 //        }
 
         mDataset[0] = "sharepreferences";
-        mDataset[1] =        "ListView";
-        mDataset[2] =  "Buttons";
+        mDataset[1] =  "innerfile";
+        mDataset[2] =  "externalfile";
         mDataset[3] =     "CodePreferenceFragment";
 
     }
