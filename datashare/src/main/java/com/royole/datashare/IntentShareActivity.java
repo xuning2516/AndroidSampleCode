@@ -8,6 +8,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class IntentShareActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class IntentShareActivity extends AppCompatActivity {
             intent.setType("text/plain");
             startActivity(Intent.createChooser(intent, getResources().getText(R.string.send_to)));
         }else if(R.id.shareactionprovider == viewId){
-
+            Toast.makeText(this, "shareactionprovider", Toast.LENGTH_SHORT).show();
         }
     }
 

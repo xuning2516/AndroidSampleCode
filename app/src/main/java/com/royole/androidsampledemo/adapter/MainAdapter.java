@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.royole.androidsampledemo.R;
 import com.royole.androidsampledemo.model.MainItem;
 import com.royole.datashare.DataShareMainActivity;
+import com.royole.fourcomponent.FourMainActivity;
 import com.royole.storageaccess.StorageMainActivity;
 import com.royole.views.activity.ViewMainActivity;
 
@@ -43,6 +44,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
                 case 0:// view
                     intent = new Intent(v.getContext(),ViewMainActivity.class);
                     v.getContext().startActivity(intent);
+                    break;
+                case 1://four component
+                    intent = new Intent(v.getContext(), FourMainActivity.class);
+                    v.getContext().startActivity(intent);
+                    break;
                 case 2: //storage
                     intent = new Intent(v.getContext(), StorageMainActivity.class);
                     v.getContext().startActivity(intent);

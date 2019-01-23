@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
         mDataset = new MainItem[DATASET_COUNT];
         mDataset[0] = new MainItem(R.drawable.ic_business_black_24dp,"views");
-        mDataset[1] = new MainItem(R.drawable.ic_call_black_24dp,"app");
+        mDataset[1] = new MainItem(R.drawable.ic_call_black_24dp,"fourcomponent");
         mDataset[2] =new MainItem(R.drawable.ic_assistant_black_36dp,"storage");
         mDataset[3] =new MainItem(R.drawable.ic_chat_black_24dp,"datashare");
     }
