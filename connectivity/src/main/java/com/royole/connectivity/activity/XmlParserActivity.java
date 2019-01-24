@@ -41,9 +41,9 @@ public class XmlParserActivity extends AppCompatActivity {
             InputStream in = getResources().openRawResource(R.raw.xmldata);
             parseXMLWithPull(in);
         }else if(R.id.sample == viewId){
-            MyXmlPullApp myXmlPullApp = new MyXmlPullApp();
+           // MyXmlPullApp myXmlPullApp = new MyXmlPullApp();
             try {
-                myXmlPullApp.main(new String[0]);
+                MyXmlPullApp.main(new String[0]);
             }catch (XmlPullParserException ex){
                 ex.printStackTrace();
             }catch (IOException ex){

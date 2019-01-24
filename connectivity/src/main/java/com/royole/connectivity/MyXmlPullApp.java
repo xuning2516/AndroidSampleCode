@@ -27,7 +27,7 @@ public class MyXmlPullApp
                     "<l>And I love you.</l>\n"+
                     "</poem>";
 
-    public void main (String args[])
+    public static void main (String args[])
             throws XmlPullParserException, IOException
     {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
