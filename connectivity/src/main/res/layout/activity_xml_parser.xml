@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.XmlParserActivity">
+
+    <Button
+        android:id="@+id/simple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="simple"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="normal"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/simple"
+        app:layout_constraintTop_toTopOf="@+id/simple" />
+
+    <Button
+        android:id="@+id/sample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="sample"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/normal"
+        app:layout_constraintTop_toTopOf="@+id/normal" />
+</android.support.constraint.ConstraintLayout>

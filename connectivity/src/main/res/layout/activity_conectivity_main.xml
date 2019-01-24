@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConectivityMainActivity">
+
+    <Button
+        android:id="@+id/xml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="xml"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/json"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="json"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/xml"
+        app:layout_constraintTop_toTopOf="@+id/xml" />
+
+    <Button
+        android:id="@+id/gson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="gson"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        app:layout_constraintStart_toEndOf="@+id/json"
+        app:layout_constraintTop_toTopOf="@+id/json" />
+</android.support.constraint.ConstraintLayout>

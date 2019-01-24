@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     protected MainItem[] mDataset;
-    private static final int DATASET_COUNT = 4;
+    private static final int DATASET_COUNT = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,5 +79,6 @@ public class MainActivity extends AppCompatActivity {
         mDataset[1] = new MainItem(R.drawable.ic_call_black_24dp,"fourcomponent");
         mDataset[2] =new MainItem(R.drawable.ic_assistant_black_36dp,"storage");
         mDataset[3] =new MainItem(R.drawable.ic_chat_black_24dp,"datashare");
+        mDataset[4] =new MainItem(R.drawable.ic_forum_black_24dp,"connectivity");
     }
 }

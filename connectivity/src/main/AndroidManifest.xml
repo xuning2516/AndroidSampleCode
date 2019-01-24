@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.royole.connectivity">
+
+    <application>
+        <activity android:name=".activity.GsonParserActivity"
+            android:label="GsonParserActivity"></activity>
+        <activity android:name=".activity.JsonParserActivity"
+            android:label="JsonParserActivity" />
+        <activity android:name=".activity.XmlParserActivity"
+            android:label="XmlParserActivity"/>
+        <activity android:name=".ConectivityMainActivity"
+            android:label="ConectivityMainActivity"/>
+    </application>
+
+</manifest>
