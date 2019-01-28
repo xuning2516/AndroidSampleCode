@@ -42,7 +42,7 @@ public class ViewMainActivity extends AppCompatActivity {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new String[4];
+        mDataset = new String[6];
 //        for (int i = 0; i < DATASET_COUNT; i++) {
 //            mDataset[i] = "This is element #" + i;
 //        }
@@ -50,7 +50,11 @@ public class ViewMainActivity extends AppCompatActivity {
        mDataset[0] = "RecyclerView";
        mDataset[1] =        "ListView";
        mDataset[2] =  "Buttons";
-       mDataset[3] =     "CodePreferenceFragment";
+       mDataset[3] =     "toolbar";
+        mDataset[4] = "webview";
+        mDataset[5] = "origntoolbar";
+
+
 
     }
 }

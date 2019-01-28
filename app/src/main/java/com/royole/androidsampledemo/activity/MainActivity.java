@@ -74,11 +74,12 @@ public class MainActivity extends AppCompatActivity {
 //        for (int i = 0; i < DATASET_COUNT; i++) {
 //            mDataset[i] = "This is element #" + i;
 //        }
-        mDataset = new MainItem[DATASET_COUNT];
+        mDataset = new MainItem[6];
         mDataset[0] = new MainItem(R.drawable.ic_business_black_24dp,"views");
         mDataset[1] = new MainItem(R.drawable.ic_call_black_24dp,"fourcomponent");
         mDataset[2] =new MainItem(R.drawable.ic_assistant_black_36dp,"storage");
         mDataset[3] =new MainItem(R.drawable.ic_chat_black_24dp,"datashare");
         mDataset[4] =new MainItem(R.drawable.ic_forum_black_24dp,"connectivity");
+        mDataset[5] =new MainItem(R.drawable.ic_forum_black_24dp,"materialview");
     }
 }

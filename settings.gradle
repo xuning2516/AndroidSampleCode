@@ -1,1 +1,1 @@
-include ':app', ':settingspreference', ':views', ':androidcommon', ':storageaccess', ':datashare', ':fourcomponent', ':connectivity'
+include ':app', ':settingspreference', ':views', ':androidcommon', ':storageaccess', ':datashare', ':fourcomponent', ':connectivity', ':androidmaterial'

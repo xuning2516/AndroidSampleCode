@@ -47,7 +47,7 @@ public class BookProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         dbHelper = new BookDatabaseHelper(getContext(), "BookStore.db", null, 2);
-        Log.d(TAG, "onCreate: ",new RuntimeException("here").fillInStackTrace());
+
         return true;
     }
     

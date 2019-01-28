@@ -1,15 +1,19 @@
 package com.royole.views.activity;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.royole.views.R;
 import com.royole.views.activity.listview.ActivateItemActivity;
@@ -40,18 +44,27 @@ public class ViewsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String viewName = intent.getStringExtra("viewName").toLowerCase();
         int id = getResources().getIdentifier("layout_"+viewName, "layout", getPackageName());
-        setContentView(id);
 
 
-        Intent activityIntent = new Intent();
+
+        Intent activityIntent = null;
         switch (viewName){
             case "listview":
+                setContentView(id);
                 initListView();
-
                 break;
-
             case "buttons":
+                setContentView(id);
                 initButtons();
+                break;
+            case "toolbar":
+
+                setContentView(id);
+                initToolbar();
+                break;
+            case "webview":
+                activityIntent = new Intent(this,WebViewActivity.class);
+                startActivity(activityIntent);
                 break;
         }
 
@@ -116,6 +129,11 @@ public class ViewsActivity extends AppCompatActivity {
 
     public void initButtons(){
 
+    }
+
+    public void initToolbar(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     public void onButtionClick(View view){

@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.royole.views.R;
+import com.royole.views.activity.OrignToolbarActivity;
+import com.royole.views.activity.ToolBarActivity;
 import com.royole.views.activity.ViewsActivity;
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MyViewHolder> {
@@ -26,20 +29,29 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MyViewHolder> 
             super(v);
             mImageView = v.findViewById(R.id.view_image_view);
             mTextView = v.findViewById(R.id.view_text_view);
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-
+                    Intent intent = null;
                     switch (mTextView.getText().toString()){
                         case "RecyclerView":
                             Toast.makeText(v.getContext(), "recyclerview", Toast.LENGTH_SHORT).show();
                             break;
                         case "ListView":
                             break;
+                        case "toolbar":
+                            intent = new Intent(v.getContext(), ToolBarActivity.class);
+                            v.getContext().startActivity(intent);
+                            return;
+                        case "origntoolbar":
+                            intent = new Intent(v.getContext(), OrignToolbarActivity.class);
+                            v.getContext().startActivity(intent);
+                            return;
                     }
 
-                    Intent intent = new Intent(v.getContext(),ViewsActivity.class);
+                    intent = new Intent(v.getContext(),ViewsActivity.class);
                     intent.putExtra("viewName",mTextView.getText().toString());
                     v.getContext().startActivity(intent);
                 }
