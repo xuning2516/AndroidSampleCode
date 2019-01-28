@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.royole.androidmaterial.MaterialMainActivity;
 import com.royole.androidsampledemo.R;
 import com.royole.androidsampledemo.model.MainItem;
 import com.royole.connectivity.ConectivityMainActivity;
@@ -60,6 +61,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
                     break;
                 case 4://connectivity
                     intent = new Intent(v.getContext(), ConectivityMainActivity.class);
+                    v.getContext().startActivity(intent);
+                    break;
+                case 5://materialview
+                    intent = new Intent(v.getContext(), MaterialMainActivity.class);
                     v.getContext().startActivity(intent);
                     break;
             }
